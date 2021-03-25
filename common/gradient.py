@@ -1,5 +1,6 @@
 # coding: utf-8
-import numpy as np
+import cupy as np
+import numpy as nnp
 
 def _numerical_gradient_1d(f, x):
     h = 1e-4 # 0.0001
@@ -31,11 +32,11 @@ def numerical_gradient_2d(f, X):
         return grad
 
 
-def numerical_gradient(f, x):
+def numerical_gradients(f, x0):
     h = 1e-4 # 0.0001
-    grad = np.zeros_like(x)
-    
-    it = np.nditer(x, flags=['multi_index'], op_flags=['readwrite'])
+    grad = np.zeros_like(x0)
+    x = np.asnumpy(x0)
+    it = nnp.nditer(x, flags=['multi_index'], op_flags=['readwrite'])
     while not it.finished:
         idx = it.multi_index
         tmp_val = x[idx]
