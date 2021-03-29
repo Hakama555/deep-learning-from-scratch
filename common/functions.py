@@ -1,8 +1,9 @@
 # coding: utf-8
-import cupy as np
+import numpy as np
 
 
 def identity_function(x):
+    
     return x
 
 

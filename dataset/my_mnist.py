@@ -1,6 +1,6 @@
 
 import tensorflow as tf
-import cupy as np
+import numpy as np
 from keras.utils import np_utils
 
 mnist = tf.keras.datasets.mnist
