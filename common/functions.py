@@ -30,8 +30,15 @@ def relu_grad(x):
     
 
 def softmax(x):
-    x = x - np.max(x, axis = -1, keepdims=True)   # オーバーフロー対策
-    return np.exp(x) / np.sum(np.exp(x), axis = 0, keepdims = False)
+    if x.ndim == 2:
+        print("softmax")
+        x = x.T
+        x = x - np.max(x, axis=0)
+        y = np.exp(x) / np.sum(np.exp(x), axis=0)
+        return y.T 
+    print("softmax2")
+    x = x - np.max(x) # オーバーフロー対策
+    return np.exp(x) / np.sum(np.exp(x))
 
 
 def sum_squared_error(y, t):
