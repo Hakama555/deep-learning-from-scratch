@@ -1,6 +1,6 @@
 # coding: utf-8
 import sys, os
-sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
+sys.path.append('E:\personal_products\personal_project\practice_learning\practice_NN\deep-learning-from-scratch')  # 親ディレクトリのファイルをインポートするための設定
 import numpy as np
 import matplotlib.pyplot as plt
 from dataset.mnist import load_mnist
