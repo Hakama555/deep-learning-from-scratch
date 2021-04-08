@@ -1,11 +1,10 @@
 # coding: utf-8
 import sys, os
-sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
+sys.path.append('E:\personal_products\personal_project\practice_learning\practice_NN\deep-learning-from-scratch')  # 親ディレクトリのファイルをインポートするための設定
 import pickle
 import numpy as np
 from collections import OrderedDict
-from common.layers import *
-
+from common.layers import Convolution, Relu, Pooling, Dropout, Affine, SoftmaxWithLoss
 
 class DeepConvNet:
     """認識率99%以上の高精度なConvNet
@@ -29,7 +28,7 @@ class DeepConvNet:
         pre_node_nums = np.array([1*3*3, 16*3*3, 16*3*3, 32*3*3, 32*3*3, 64*3*3, 64*4*4, hidden_size])
         weight_init_scales = np.sqrt(2.0 / pre_node_nums)  # ReLUを使う場合に推奨される初期値
         
-        self.params = {}
+        self.params = {} 
         pre_channel_num = input_dim[0]
         for idx, conv_param in enumerate([conv_param_1, conv_param_2, conv_param_3, conv_param_4, conv_param_5, conv_param_6]):
             self.params['W' + str(idx+1)] = weight_init_scales[idx] * np.random.randn(conv_param['filter_num'], pre_channel_num, conv_param['filter_size'], conv_param['filter_size'])
