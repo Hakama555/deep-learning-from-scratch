@@ -2,7 +2,7 @@
 import sys, os
 sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
 import numpy as np
-from common.optimizer import *
+from common.optimizer import SGD, Momentum, Nesterov, AdaGrad, Adam, RMSprop
 
 class Trainer:
     """ニューラルネットの訓練を行うクラス
@@ -35,6 +35,20 @@ class Trainer:
         self.train_loss_list = []
         self.train_acc_list = []
         self.test_acc_list = []
+        
+    def accuracy(self, x, t, batch_size=100):
+        if t.ndim != 1 : t = np.argmax(t, axis=1)
+        
+        acc = 0.0
+        
+        for i in range(int(x.shape[0] / batch_size)):
+            tx = x[i*batch_size:(i+1)*batch_size]
+            tt = t[i*batch_size:(i+1)*batch_size]
+            y = self.predict(tx)
+            y = np.argmax(y, axis=1)
+            acc += np.sum(y == tt) 
+        
+        return acc / x.shape[0]
 
     def train_step(self):
         batch_mask = np.random.choice(self.train_size, self.batch_size)

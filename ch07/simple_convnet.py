@@ -71,19 +71,7 @@ class SimpleConvNet:
         y = self.predict(x)
         return self.last_layer.forward(y, t)
 
-    def accuracy(self, x, t, batch_size=100):
-        if t.ndim != 1 : t = np.argmax(t, axis=1)
-        
-        acc = 0.0
-        
-        for i in range(int(x.shape[0] / batch_size)):
-            tx = x[i*batch_size:(i+1)*batch_size]
-            tt = t[i*batch_size:(i+1)*batch_size]
-            y = self.predict(tx)
-            y = np.argmax(y, axis=1)
-            acc += np.sum(y == tt) 
-        
-        return acc / x.shape[0]
+    
 
     def numerical_gradient(self, x, t):
         """勾配を求める（数値微分）
